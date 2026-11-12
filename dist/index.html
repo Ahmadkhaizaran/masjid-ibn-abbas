@@ -51,7 +51,13 @@
     <main class="main-layout">
       <section class="identity" aria-labelledby="mosque-name">
         <div class="identity-art" aria-hidden="true"><div class="arch arch-outer"></div><div class="arch arch-inner"></div><span class="art-star star-right">✦</span><span class="art-star star-left">✦</span></div>
-        <div class="logo-frame"><img src="assets/mosque-logo.jpeg" width="760" height="760" alt="شعار وقف الإمام الشافعي: العلماء ورثة الأنبياء" fetchpriority="high"></div>
+        <div class="logo-frame">
+          <svg class="mosque-logo" xmlns="http://www.w3.org/2000/svg" viewBox="102 41 543 632" role="img" aria-labelledby="mosque-logo-label">
+            <title id="mosque-logo-label">شعار وقف الإمام الشافعي: العلماء ورثة الأنبياء</title>
+            <defs><clipPath id="mosque-logo-silhouette" clipPathUnits="userSpaceOnUse"><path fill="#fff" stroke="none" d="M103 303C103 158 224 41 374 41C524 41 645 158 645 303V598C645 646 619 672 568 672L182 671C130 671 103 646 103 597Z"/></clipPath></defs>
+            <image href="assets/mosque-logo.jpeg" x="0" y="0" width="760" height="760" clip-path="url(#mosque-logo-silhouette)"/>
+          </svg>
+        </div>
         <p class="eyebrow">مسجد حَبْر الأمّة</p>
         <h1 id="mosque-name">عبد الله بن عباس</h1>
         <p class="endowment-name">وقف الإمام الشافعي</p>
