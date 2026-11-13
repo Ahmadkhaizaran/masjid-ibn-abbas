@@ -54,3 +54,7 @@ The original static QR encodes the plain homepage URL, so its visits cannot be s
 
 Backend schema: `supabase/admin-schema.sql`. Deploy `supabase/functions/mosque-api/index.ts` with `verify_jwt=false` as specified in `supabase/config.toml`; the function performs its own authentication. The Supabase-provided service key remains in the function environment. The private owner record must be provisioned separately and must never be included in SQL source or seed data.
 
+
+## Recovered pre-tracking history
+
+The owner dashboard separately shows a preserved aggregate snapshot recovered from Supabase gateway logs. The original unit is successful reads of the public social-links data by browser user agents, with known automated agents excluded. This is not a person count or a replacement for instrumented page views. The protected `site_traffic_history` table retains only aggregate counts and provenance, never IP addresses. It is exposed solely through the authenticated dashboard handler. Schema: `supabase/recovered-traffic-history.sql`.

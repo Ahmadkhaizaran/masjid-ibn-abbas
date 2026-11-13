@@ -24,6 +24,14 @@
   try{
    const days=Number($('period').value);const data=await api('dashboard?days='+days);
    $('online-count').textContent=number(data.online);for(const key of ['views','visitors','clicks','qr'])$('stat-'+key).textContent=number(data.totals[key]);
+   const history=data.legacy_history?.[0];$('recovered-history').hidden=!history;
+   if(history){
+    $('history-requests').textContent=number(history.request_count);$('history-networks').textContent=number(history.network_count);
+    const format=value=>new Date(value).toLocaleString('ar-LB',{timeZone:'Asia/Beirut',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit'});
+    $('history-period').textContent='الفترة المستعادة: '+format(history.period_start)+' — '+format(history.period_end)+' · بتوقيت بيروت. هذا السجل ثابت ولا يتأثر بفلتر الفترة.';
+    const body=$('history-days');body.replaceChildren();
+    for(const row of history.daily||[]){const tr=element('tr');tr.append(element('td','',new Date(row.day+'T12:00:00Z').toLocaleDateString('ar-LB',{timeZone:'Asia/Beirut'})),element('td','',number(row.requests)));body.append(tr);}
+   }
    const daily=new Map(data.daily.map(row=>[row.day,row]));const today=new Date(beirutDay()+'T12:00:00Z');const chart=$('daily-chart');chart.replaceChildren();
    const startDay=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Beirut',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(data.started_at));const startDate=new Date(startDay+'T12:00:00Z');const actualDays=Math.max(1,Math.round((today-startDate)/86400000)+1);const count=Math.min(days,actualDays,90);const rows=[];
    for(let offset=count-1;offset>=0;offset--){const date=new Date(today);date.setUTCDate(date.getUTCDate()-offset);const day=date.toISOString().slice(0,10);rows.push({day,views:daily.get(day)?.views||0});}
