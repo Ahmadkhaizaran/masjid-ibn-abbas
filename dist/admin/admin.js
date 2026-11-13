@@ -26,7 +26,7 @@
    $('online-count').textContent=number(data.online);for(const key of ['views','visitors','clicks','qr'])$('stat-'+key).textContent=number(data.totals[key]);
    const history=data.legacy_history?.[0];$('recovered-history').hidden=!history;
    if(history){
-    $('history-requests').textContent=number(history.request_count);$('history-networks').textContent=number(history.network_count);
+    $('history-requests').textContent=number(history.request_count);
     const format=value=>new Date(value).toLocaleString('ar-LB',{timeZone:'Asia/Beirut',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit'});
     $('history-period').textContent='الفترة المستعادة: '+format(history.period_start)+' — '+format(history.period_end)+' · بتوقيت بيروت. هذا السجل ثابت ولا يتأثر بفلتر الفترة.';
     const body=$('history-days');body.replaceChildren();
