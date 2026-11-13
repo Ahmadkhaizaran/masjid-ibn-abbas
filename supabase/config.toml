@@ -1,0 +1,4 @@
+[functions.mosque-api]
+# The handler enforces the owner-only opaque session cookie for all admin actions.
+# Login and privacy-preserving event ingestion are deliberately public endpoints.
+verify_jwt = false

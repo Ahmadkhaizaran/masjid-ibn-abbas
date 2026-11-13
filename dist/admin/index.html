@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#173d39">
+ <title>إدارة الموقع | مسجد عبد الله بن عباس</title>
+ <link rel="icon" href="/assets/mosque-logo.jpeg"><link rel="stylesheet" href="/admin/admin.css">
+ <script src="/admin/admin.js" defer></script>
+</head>
+<body>
+ <div class="pattern" aria-hidden="true"></div>
+ <main>
+  <section class="login-wrap" id="login-screen" aria-labelledby="login-title">
+   <a class="back-link" href="/">← العودة إلى الموقع</a>
+   <div class="login-card">
+    <span class="brand-mark" aria-hidden="true">✦</span><p class="kicker">مسجد عبد الله بن عباس</p>
+    <h1 id="login-title">أهلاً بك في لوحة الإدارة</h1><p class="muted">مساحة خاصة لإدارة الموقع ومتابعة أثره.</p>
+    <form id="login-form">
+     <label for="username">اسم المستخدم</label><input id="username" name="username" dir="ltr" autocomplete="username" required maxlength="80" autocapitalize="none" spellcheck="false">
+     <label for="password">كلمة المرور</label><div class="password-field"><input id="password" name="password" type="password" dir="ltr" autocomplete="current-password" required maxlength="256"><button class="quiet" id="show-password" type="button" aria-pressed="false">إظهار</button></div>
+     <button class="primary full" type="submit" id="login-submit">دخول إلى لوحة الإدارة <span aria-hidden="true">←</span></button>
+     <p id="login-status" class="status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="login-foot">الدخول مخصّص لإدارة الموقع فقط</p>
+   </div>
+  </section>
+  <div id="dashboard-screen" class="dashboard" hidden>
+   <header class="admin-header"><div><p class="kicker">مسجد عبد الله بن عباس</p><h1>لوحة الإدارة</h1></div><div class="header-actions"><a class="button quiet" href="/" target="_blank" rel="noopener">عرض الموقع ↗</a><button class="quiet" id="logout" type="button">تسجيل الخروج</button></div></header>
+   <nav class="tabs" aria-label="أقسام الإدارة"><button class="tab active" data-tab="overview" aria-current="page">نظرة عامة</button><button class="tab" data-tab="links">الروابط</button><button class="tab" data-tab="settings">محتوى الموقع</button><button class="tab" data-tab="qr">رابط الـQR</button></nav>
+   <p id="global-status" class="status" role="status" aria-live="polite"></p>
+   <section id="panel-overview" class="panel" aria-labelledby="overview-title">
+    <div class="section-title"><div><p class="kicker">حضور الموقع</p><h2 id="overview-title">كل زيارة، بداية تواصل</h2></div><div class="period-control"><label class="sr-only" for="period">الفترة</label><select id="period"><option value="1">اليوم</option><option value="7" selected>آخر ٧ أيام</option><option value="30">آخر ٣٠ يوماً</option><option value="90">آخر ٩٠ يوماً</option><option value="3650">منذ البداية</option></select><button class="quiet" id="refresh-stats" type="button">تحديث ↻</button></div></div>
+    <div class="online-banner"><span class="live-dot" aria-hidden="true"></span><strong id="online-count">—</strong><span>نشطون الآن</span><small>خلال آخر ٥ دقائق</small></div>
+    <div class="stats-grid"><article class="stat-card"><span>زيارات الصفحة</span><strong id="stat-views">—</strong><small>كل فتح جديد للصفحة</small></article><article class="stat-card"><span>زوّار تقديريون</span><strong id="stat-visitors">—</strong><small>متصفّحات مختلفة</small></article><article class="stat-card"><span>ضغطات الروابط</span><strong id="stat-clicks">—</strong><small>تواصل عبر المنصّات</small></article><article class="stat-card"><span>زيارات من QR مُتتبَّع</span><strong id="stat-qr">—</strong><small>عبر رابط الـQR المخصّص</small></article></div>
+    <div class="analytics-grid"><article class="card"><div class="card-heading"><h3>الزيارات عبر الأيام</h3><span class="muted small">بتوقيت بيروت</span></div><div id="daily-chart" class="daily-chart" aria-label="الزيارات اليومية"></div></article><article class="card"><h3>الروابط الأكثر تفاعلاً</h3><div id="popular-links" class="rank-list"></div></article></div>
+    <div class="analytics-grid"><article class="card"><h3>من أين تأتي الزيارات؟</h3><div id="traffic-sources" class="breakdown"></div></article><article class="card"><h3>الأجهزة المستخدمة</h3><div id="traffic-devices" class="breakdown"></div></article></div>
+    <p class="fine-print" id="stats-footnote"></p><p class="fine-print">الأرقام تقديرية: قد تمنع إعدادات الخصوصية بعض الزيارات. زياراتك أثناء تسجيل الدخول إلى الإدارة لا تُحتسب.</p>
+   </section>
+   <section id="panel-links" class="panel" aria-labelledby="links-heading" hidden>
+    <div class="section-title"><div><p class="kicker">جسور التواصل</p><h2 id="links-heading">روابط المسجد</h2></div><button class="primary" id="new-link" type="button">+ إضافة رابط</button></div>
+    <p class="muted">عدّل الروابط ورتّبها بالأرقام. إلغاء «ظاهر في الموقع» يخفي الرابط ويمكن إظهاره لاحقاً.</p>
+    <div id="admin-links" class="admin-links"></div>
+    <form id="link-form" class="card editor" hidden>
+     <div class="card-heading"><h3 id="link-form-title">إضافة رابط جديد</h3><button class="quiet" id="cancel-link" type="button">إلغاء</button></div>
+     <input id="link-id" type="hidden"><div class="form-grid"><div><label for="link-label">اسم الرابط</label><input id="link-label" required maxlength="80" placeholder="مثلاً: موقع المسجد"></div><div><label for="link-icon">الأيقونة</label><select id="link-icon"><option value="link">رابط عام</option><option value="whatsapp">واتساب</option><option value="facebook">فيسبوك</option><option value="instagram">إنستغرام</option><option value="youtube">يوتيوب</option><option value="telegram">تلغرام</option><option value="tiktok">تيك توك</option><option value="location">الموقع الجغرافي</option><option value="phone">التواصل</option></select></div></div>
+     <label for="link-url">الرابط الكامل</label><input id="link-url" type="url" dir="ltr" required maxlength="2048" placeholder="https://…">
+     <label for="link-description">وصف قصير</label><input id="link-description" maxlength="160" placeholder="وصف يظهر تحت اسم الرابط">
+     <div class="form-grid"><div><label for="link-order">الترتيب</label><input id="link-order" type="number" min="0" max="1000" value="1" required></div><div class="checkbox-group"><label><input id="link-active" type="checkbox" checked> ظاهر في الموقع</label><label><input id="link-featured" type="checkbox"> رابط مميّز باللون الأخضر</label></div></div>
+     <button class="primary" type="submit" id="save-link">حفظ الرابط</button><p id="link-status" class="status" role="status"></p>
+    </form>
+   </section>
+   <section id="panel-settings" class="panel" aria-labelledby="settings-heading" hidden>
+    <div class="section-title"><div><p class="kicker">الكلمة الطيّبة</p><h2 id="settings-heading">محتوى الموقع</h2></div></div>
+    <form id="settings-form" class="card editor"><div class="form-grid"><div><label for="setting-eyebrow">السطر فوق اسم المسجد</label><input id="setting-eyebrow" required maxlength="100"></div><div><label for="setting-display_name">اسم المسجد الرئيسي</label><input id="setting-display_name" required maxlength="100"></div></div><label for="setting-endowment">اسم الوقف</label><input id="setting-endowment" required maxlength="120"><label for="setting-hero_note">العبارة الرئيسية</label><input id="setting-hero_note" required maxlength="140"><label for="setting-hero_description">النص التعريفي</label><textarea id="setting-hero_description" rows="3" required maxlength="300"></textarea><div class="form-grid"><div><label for="setting-phone">رقم التواصل الدولي (اختياري)</label><input id="setting-phone" type="tel" dir="ltr" placeholder="+961…" maxlength="20"></div><div><label for="setting-phone_display">طريقة عرض الرقم</label><input id="setting-phone_display" dir="ltr" maxlength="40" placeholder="+961 …"></div></div><p class="fine-print">اترك الرقم فارغاً لإخفاء قسم الاتصال.</p><button class="primary" type="submit" id="save-settings">حفظ التعديلات</button><p id="settings-status" class="status" role="status"></p></form>
+   </section>
+   <section id="panel-qr" class="panel" aria-labelledby="qr-heading" hidden>
+    <div class="section-title"><div><p class="kicker">من الورق إلى الموقع</p><h2 id="qr-heading">قياس زيارات الـQR</h2></div></div>
+    <article class="card qr-info"><span class="brand-mark" aria-hidden="true">⌘</span><h3>الـQR الحالي سيبقى يعمل</h3><p>الرمز الذي جهّزناه سابقاً يفتح رابط الموقع مباشرة، لذلك تُحتسب زياراته ضمن «زيارات الصفحة» ولا يمكن فصلها عن فتح الرابط العادي.</p><h3>للتمييز في المطبوعات الجديدة</h3><p>استخدم هذا الرابط عند إنشاء QR جديد. كل فتح له يُسجَّل كزيارة من QR متتبَّع:</p><div class="copy-row"><input id="tracked-qr-url" value="https://masjid-ibn-abbas.vercel.app/?source=qr" readonly dir="ltr" aria-label="رابط QR المتتبّع"><button class="primary" id="copy-qr" type="button">نسخ الرابط</button></div><p class="fine-print">العداد يقيس فتح الصفحة من الرابط المخصّص؛ مسح الرمز من دون فتح الصفحة لا يمكن رصده، ومشاركة هذا الرابط تُحتسب أيضاً ضمن المصدر نفسه.</p></article>
+   </section>
+   <footer class="admin-footer"><span>وقف الإمام الشافعي</span><span>إدارة بسيطة، وأثر مستمرّ.</span></footer>
+  </div>
+ </main>
+</body>
+</html>

@@ -66,14 +66,7 @@
     if (!config.supabaseUrl || !config.supabasePublishableKey) return;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 5000);
-    const allowedHosts = {
-      whatsapp: ['whatsapp.com', 'www.whatsapp.com'],
-      facebook: ['facebook.com', 'www.facebook.com'],
-      instagram: ['instagram.com', 'www.instagram.com'],
-      youtube: ['youtube.com', 'www.youtube.com', 'youtu.be'],
-      telegram: ['t.me', 'telegram.me'],
-      tiktok: ['tiktok.com', 'www.tiktok.com']
-    };
+    const allowedIcons = new Set(['whatsapp','facebook','instagram','youtube','telegram','tiktok','link','location','phone']);
     const read = async path => {
       const response = await fetch(config.supabaseUrl + '/rest/v1/' + path, {
         headers: {apikey: config.supabasePublishableKey},
@@ -84,29 +77,37 @@
     };
     try {
       const [links, settings] = await Promise.all([
-        read('social_links?select=platform,label,description,url,sort_order&order=sort_order.asc'),
-        read('site_settings?select=phone,phone_display&id=eq.1&limit=1')
+        read('social_links?select=platform,label,description,url,sort_order,icon,featured&order=sort_order.asc,platform.asc'),
+        read('site_settings?select=phone,phone_display,name,endowment,display_name,eyebrow,hero_note,hero_description&id=eq.1&limit=1')
       ]);
       if (!Array.isArray(links) || !Array.isArray(settings)) return;
       const validLinks = links.filter(row => {
         try {
           const target = new URL(row.url);
           return target.protocol === 'https:' && !target.username && !target.password
-            && allowedHosts[row.platform]?.includes(target.hostname);
+            && /^[a-z0-9_-]{1,64}$/.test(row.platform) && typeof row.label === 'string';
         } catch { return false; }
       });
       if (validLinks.length !== links.length) return;
-      const byPlatform = new Map(validLinks.map(row => [row.platform, row]));
-      document.querySelectorAll('a[data-platform]').forEach(link => {
-        const row = byPlatform.get(link.dataset.platform);
-        link.hidden = !row;
-        if (!row) return;
-        link.href = row.url;
-        link.style.order = String(Number(row.sort_order) || 0);
-        link.querySelector('.link-copy strong').textContent = row.label;
-        link.querySelector('.link-copy > span').textContent = row.description;
-      });
-      if (settings[0]) applyPhone(settings[0].phone, settings[0].phone_display);
+      const nav=document.querySelector('.social-links');
+      const fragment=document.createDocumentFragment();
+      const svgIcon=(id,className)=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('aria-hidden','true');if(className)svg.setAttribute('class',className);const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','#i-'+id);svg.append(use);return svg;};
+      for(const row of validLinks){
+        const icon=allowedIcons.has(row.icon)?row.icon:'link';
+        const link=document.createElement('a');link.className='social-link'+(row.featured?' featured':'');link.dataset.platform=row.platform;link.href=row.url;link.target='_self';link.rel='external';
+        const badge=document.createElement('span');badge.className='platform-icon';badge.append(svgIcon(icon));
+        const copy=document.createElement('span');copy.className='link-copy';const title=document.createElement('strong');title.textContent=row.label;const description=document.createElement('span');description.textContent=row.description||'';copy.append(title,description);link.append(badge,copy);
+        if(row.featured){const label=document.createElement('span');label.className='featured-label';label.textContent=icon==='whatsapp'?'انضمّ الآن':'تابعنا';link.append(label);}
+        else {const english={facebook:'Facebook',instagram:'Instagram',youtube:'YouTube',telegram:'Telegram',tiktok:'TikTok'}[icon];if(english){const label=document.createElement('span');label.className='platform-english';label.lang='en';label.dir='ltr';label.textContent=english;link.append(label);}}
+        link.append(svgIcon('arrow','link-arrow'));fragment.append(link);
+      }
+      nav.replaceChildren(fragment);
+      if(settings[0]){
+        const value=settings[0];applyPhone(value.phone,value.phone_display);
+        const set=(selector,text)=>{if(typeof text==='string')document.querySelector(selector).textContent=text;};
+        set('#mosque-name',value.display_name);set('.eyebrow',value.eyebrow);set('.endowment-name',value.endowment);set('.hero-note',value.hero_note);set('.hero-description',value.hero_description);set('footer > span:first-child',value.name);set('footer .footer-dot + span',value.endowment);
+        if(value.endowment)document.querySelector('.topbar .endowment').lastChild.textContent=' '+value.endowment;
+      }
       document.documentElement.dataset.contentSource = 'supabase';
     } catch {
       // Preserve the original usable links when the network is unavailable.

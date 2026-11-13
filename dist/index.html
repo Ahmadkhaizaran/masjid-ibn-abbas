@@ -21,10 +21,13 @@
   <link rel="stylesheet" href="typography.css">
   <script src="config.js" defer></script>
   <script src="app.js" defer></script>
+  <script src="traffic.js" defer></script>
 </head>
 <body>
   <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="m10 13 4-4M8 16l-2 2a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m2 1 2-2a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0" transform="translate(1 0)"/></symbol>
+      <symbol id="i-location" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
       <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M17 7H7v10M7 7l10 10"/></symbol>
       <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3m-4 4 4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></symbol>
       <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
@@ -83,5 +86,6 @@
   </div>
   <dialog id="share-dialog" aria-labelledby="share-title"><div class="dialog-heading"><h2 id="share-title">شارك الصفحة مع من تحبّ</h2><button id="close-dialog" type="button" aria-label="إغلاق">×</button></div><p>انسخ الرابط وأرسله لأهلك وأصدقائك.</p><label class="sr-only" for="share-url">رابط الصفحة</label><div class="copy-field"><input id="share-url" type="url" readonly dir="ltr"><button id="copy-link" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>نسخ</span></button></div><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a class="admin-entry" href="/admin" aria-label="إدارة الموقع" title="إدارة الموقع" rel="nofollow"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v2"/></svg></a>
 </body>
 </html>
