@@ -25,7 +25,7 @@
    </div>
   </section>
   <div id="dashboard-screen" class="dashboard" hidden>
-   <header class="admin-header"><div><p class="kicker">مسجد عبد الله بن عباس</p><h1>لوحة الإدارة</h1></div><div class="header-actions"><a class="button quiet" href="/" target="_blank" rel="noopener">عرض الموقع ↗</a><button class="quiet" id="logout" type="button">تسجيل الخروج</button></div></header>
+   <header class="admin-header"><div><p class="kicker">مسجد عبد الله بن عباس</p><h1>لوحة الإدارة</h1></div><div class="header-actions"><a class="button quiet" href="/" target="_blank" rel="noopener">عرض الموقع</a><button class="quiet" id="logout" type="button">تسجيل الخروج</button></div></header>
    <nav class="tabs" aria-label="أقسام الإدارة"><button class="tab active" data-tab="overview" aria-current="page">نظرة عامة</button><button class="tab" data-tab="links">الروابط</button><button class="tab" data-tab="settings">محتوى الموقع</button><button class="tab" data-tab="qr">رابط الـQR</button></nav>
    <p id="global-status" class="status" role="status" aria-live="polite"></p>
    <section id="panel-overview" class="panel" aria-labelledby="overview-title">
@@ -55,7 +55,7 @@
    </section>
    <section id="panel-qr" class="panel" aria-labelledby="qr-heading" hidden>
     <div class="section-title"><div><p class="kicker">من الورق إلى الموقع</p><h2 id="qr-heading">قياس زيارات الـQR</h2></div></div>
-    <article class="card qr-info"><span class="brand-mark" aria-hidden="true">⌘</span><h3>الـQR الحالي سيبقى يعمل</h3><p>الرمز الذي جهّزناه سابقاً يفتح رابط الموقع مباشرة، لذلك تُحتسب زياراته ضمن «زيارات الصفحة» ولا يمكن فصلها عن فتح الرابط العادي.</p><h3>للتمييز في المطبوعات الجديدة</h3><p>استخدم هذا الرابط عند إنشاء QR جديد. كل فتح له يُسجَّل كزيارة من QR متتبَّع:</p><div class="copy-row"><input id="tracked-qr-url" value="https://masjid-ibn-abbas.vercel.app/?source=qr" readonly dir="ltr" aria-label="رابط QR المتتبّع"><button class="primary" id="copy-qr" type="button">نسخ الرابط</button></div><p class="fine-print">العداد يقيس فتح الصفحة من الرابط المخصّص؛ مسح الرمز من دون فتح الصفحة لا يمكن رصده، ومشاركة هذا الرابط تُحتسب أيضاً ضمن المصدر نفسه.</p></article>
+    <article class="card qr-info"><span class="brand-mark" aria-hidden="true">⌘</span><h3>الـQR الحالي سيبقى يعمل</h3><p>الرمز الذي جهّزناه سابقاً يفتح رابط الموقع مباشرة، لذلك تُحتسب زياراته ضمن «زيارات الصفحة» ولا يمكن فصلها عن فتح الرابط العادي.</p><h3>للتمييز في المطبوعات الجديدة</h3><p>استخدم هذا الرابط عند إنشاء QR جديد. كل فتح له يُسجَّل كزيارة من QR متتبَّع:</p><div class="copy-row"><input id="tracked-qr-url" value="https://masjid-ibn-abbas.vercel.app/?source=qr" readonly dir="ltr" aria-label="رابط QR المتتبّع"><button class="primary" id="copy-qr" type="button">نسخ الرابط</button></div><div class="qr-downloads"><a class="button primary" href="/assets/qr-tracked.png" download="Masjid-QR-Tracked.png">تنزيل QR بصيغة PNG</a><a class="button quiet" href="/assets/qr-tracked.svg" download="Masjid-QR-Tracked.svg">SVG للطباعة والتكبير</a></div><p class="fine-print">العداد يقيس فتح الصفحة من الرابط المخصّص؛ مسح الرمز من دون فتح الصفحة لا يمكن رصده، ومشاركة هذا الرابط تُحتسب أيضاً ضمن المصدر نفسه.</p></article>
    </section>
    <footer class="admin-footer"><span>وقف الإمام الشافعي</span><span>إدارة بسيطة، وأثر مستمرّ.</span></footer>
   </div>
